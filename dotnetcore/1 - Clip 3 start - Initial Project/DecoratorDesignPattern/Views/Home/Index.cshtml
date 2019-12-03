@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model DecoratorDesignPattern.WeatherInterface.CurrentWeather
+
+
+
+<div>
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="display-4">Welcome</h1>
+            <p>Learn about the Decorator design pattern</p>
+            <p>Be sure to have obtained an API key from OpenWeatherMap.org and placed it in your appSettings.json file.  For instructions, go to
+                <a asp-area="" asp-controller="Home" asp-action="ApiKey">Get an API Key</a>
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 22rem;">
+
+                @if (@Model.Success)
+                {
+                    <div class="card-header text-white bg-primary">
+                        Weather for @Model.Location.Name
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Observed at @Model.ObservationTime</h6>
+
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-left">Conditions</div>
+                            <div class="col-sm-6 text-right">@Model.CurrentConditions.Conditions</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-left">Visibility</div>
+                            <div class="col-sm-6 text-right">@Model.CurrentConditions.Visibility.ToString("#0.00") miles</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-left">Cloud Cover</div>
+                            <div class="col-sm-6 text-right">@Model.CurrentConditions.CloudCover %</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-left">Temperature</div>
+                            <div class="col-sm-6 text-right">@Model.CurrentConditions.Temperature.ToString("#0.0") &deg; F</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-left">Humidity</div>
+                            <div class="col-sm-6 text-right">@Model.CurrentConditions.Humidity.ToString("#0.0") %</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-left">Barometer</div>
+                            <div class="col-sm-6 text-right">@Model.CurrentConditions.Pressure.ToString("#0.00") in/Hg</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-left">Wind</div>
+                            <div class="col-sm-6 text-right">@Model.CurrentConditions.WindDirection.Abbreviation @Model.CurrentConditions.WindSpeed.ToString("#0.0") mph</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 font-weight-bold text-left">Rainfall (1 hour)</div>
+                            <div class="col-sm-6 text-right">@Model.CurrentConditions.RainfallOneHour.ToString("#0.00") in</div>
+                        </div>
+
+                        <p class="text-muted text-center" style="margin: 6px">
+                            Fetch time: @Model.FetchTime
+                        </p>
+                    </div>
+                    <div class="card-body text-left">
+                        <form method="get">
+                            <span class="font-weight-bold" style="margin-bottom: 5px">Get Weather</span>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <input id="weatherCity" name="location" class="form-control" type="text" placeholder="City name" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="submit" id="getWeather" class="btn btn-primary">Get</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="card-header text-white bg-danger">
+                        @Model.ErrorMessage
+                    </div>
+                    <div class="card-body text-left">
+                        <form method="get">
+                            <span class="font-weight-bold" style="margin-bottom: 5px">Get Weather</span>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <input id="weatherCity" name="location" class="form-control" type="text" placeholder="City name" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="submit" id="getWeather" class="btn btn-primary">Get</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
