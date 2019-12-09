@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamsAndDecorators", "StreamsAndDecorators\StreamsAndDecorators.csproj", "{CAC5885D-2F42-4C9E-BEAA-CE6EE0D8B46F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAC5885D-2F42-4C9E-BEAA-CE6EE0D8B46F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC5885D-2F42-4C9E-BEAA-CE6EE0D8B46F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC5885D-2F42-4C9E-BEAA-CE6EE0D8B46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC5885D-2F42-4C9E-BEAA-CE6EE0D8B46F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {530827E2-805D-4770-8586-0EB62EB3DB99}
+	EndGlobalSection
+EndGlobal
