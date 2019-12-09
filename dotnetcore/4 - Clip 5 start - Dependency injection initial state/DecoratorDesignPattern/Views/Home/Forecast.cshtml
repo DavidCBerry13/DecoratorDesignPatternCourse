@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Forecast";
+}
+@model DecoratorDesignPattern.WeatherInterface.LocationForecast
+
+
+<h1>Forecast for @Model.Location.Name</h1>
+
+
+<div class="row">
+    <form method="get">
+        <div class="form-row">
+            <div class="col font-weight-bold">
+                <label id="forecastCityLabel" for="forecastCity" class="col-form-label">Get Forecast</label>
+            </div>
+            <div class="col">
+                <input id="forecastCity" name="location" class="form-control" type="text" placeholder="City name" />
+            </div>
+            <div class="col">
+                <button type="submit" id="getForecast" class="btn btn-primary">Get Forecast</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row" style="margin-top: 10px">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Forecast Time
+                </th>
+                <th>
+                    Conditions
+                </th>
+                <th>
+                    Temp (F)
+                </th>
+                <th>
+                    Humidity (%)
+                </th>
+                <th>
+                    Barometer (in/Hg)
+                </th>
+                <th>
+                    Wind (mph)
+                </th>
+                <th>
+                    Cloud Cover (%)
+                </th>
+                <th>
+                    Rain
+                </th>
+                <th>
+                    Snow
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Forecasts)
+            {
+                <tr>
+                    <td>
+                        @item.ForecastTime
+                    </td>
+                    <td>
+                        @item.Conditions
+                    </td>
+                    <td>
+                        @item.Temperature.ToString("#0.0")&deg;
+                    </td>
+                    <td>
+                        @item.Humidity
+                    </td>
+                    <td>
+                        @item.Pressure.ToString("00.00")
+                    </td>
+                    <td>
+                        @item.WindDirection.Abbreviation @item.WindSpeed.ToString("#0.0")
+                    </td>
+                    <td>
+                        @item.CloudCover
+                    </td>
+                    <td>
+                        @item.ExpectedRainfall.ToString("0.00")
+                    </td>
+                    <td>
+                        @item.ExpectedSnowfall.ToString("0.00")
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
