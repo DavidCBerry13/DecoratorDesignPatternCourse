@@ -10,14 +10,14 @@ namespace DecoratorDesignPattern.WeatherInterface
     {
 
 
-        public WeatherServiceCachingDecorator(IWeatherService weatherClient, IMemoryCache cache)
+        public WeatherServiceCachingDecorator(IWeatherService weatherService, IMemoryCache cache)
         {
-            _decoratedWeatherClient = weatherClient;
+            _innerWeatehrService = weatherService;
             _cache = cache;
         }
 
         private IMemoryCache _cache;
-        private IWeatherService _decoratedWeatherClient;
+        private IWeatherService _innerWeatehrService;
 
 
         public CurrentWeather GetCurrentWeather(string location)
@@ -29,7 +29,7 @@ namespace DecoratorDesignPattern.WeatherInterface
             }
             else
             {
-                var currentConditions = _decoratedWeatherClient.GetCurrentWeather(location);
+                var currentConditions = _innerWeatehrService.GetCurrentWeather(location);
                 _cache.Set<CurrentWeather>(cacheKey, currentConditions, TimeSpan.FromMinutes(30));
                 return currentConditions;
             }
@@ -40,7 +40,18 @@ namespace DecoratorDesignPattern.WeatherInterface
 
         public LocationForecast GetForecast(string location)
         {
-            return _decoratedWeatherClient.GetForecast(location);
+            string cacheKey = $"WeatherForecast::{location}";
+            if (_cache.TryGetValue<LocationForecast>(cacheKey, out var forecast))
+            {
+                return forecast;
+            }
+            else
+            {
+                var locationForecast = _innerWeatehrService.GetForecast(location);
+                _cache.Set<LocationForecast>(cacheKey, locationForecast, TimeSpan.FromMinutes(30));
+                return locationForecast;
+
+            }
         }
 
     }

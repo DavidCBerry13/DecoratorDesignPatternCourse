@@ -21,10 +21,10 @@ namespace DecoratorDesignPattern.WeatherInterface
 
         public CurrentWeather GetCurrentWeather(string location)
         {
-            var sw = Stopwatch.StartNew();
-            var currentWeather = _innerWeatherService.GetCurrentWeather(location);
+            Stopwatch sw = Stopwatch.StartNew();
+            CurrentWeather currentWeather = _innerWeatherService.GetCurrentWeather(location);
             sw.Stop();
-            var elapsedMillis = sw.ElapsedMilliseconds;
+            long elapsedMillis = sw.ElapsedMilliseconds;
             _logger.LogWarning("Retrieved weather data for {location} - Elapsed ms: {} {@currentWeather}", location, elapsedMillis, currentWeather);
 
             return currentWeather;
@@ -32,7 +32,13 @@ namespace DecoratorDesignPattern.WeatherInterface
 
         public LocationForecast GetForecast(string location)
         {
-            return _innerWeatherService.GetForecast(location);
+            Stopwatch sw = Stopwatch.StartNew();
+            LocationForecast forecast = _innerWeatherService.GetForecast(location);
+            sw.Stop();
+            long elapsedMillis = sw.ElapsedMilliseconds;
+            _logger.LogWarning("Retrieved forecast data for {location} - Elapsed ms: {} {@currentWeather}", location, elapsedMillis, currentWeather);
+
+            return forecast;
         }
     }
 }
