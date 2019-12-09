@@ -36,7 +36,7 @@ namespace DecoratorDesignPattern.WeatherInterface
             LocationForecast forecast = _innerWeatherService.GetForecast(location);
             sw.Stop();
             long elapsedMillis = sw.ElapsedMilliseconds;
-            _logger.LogWarning("Retrieved forecast data for {location} - Elapsed ms: {} {@currentWeather}", location, elapsedMillis, currentWeather);
+            _logger.LogWarning("Retrieved forecast data for {location} - Elapsed ms: {} {@currentWeather}", location, elapsedMillis, forecast);
 
             return forecast;
         }
